@@ -104,14 +104,19 @@ const finalizePhotoStrip = () => {
     ctx.drawImage(img, 0, 0, WIDTH, HALF, 0, i * HALF, WIDTH, HALF);
   });
 
-  // draw frame
+  // draw frame with corrected path
   const frame = new Image();
-  frame.src = 'Assets/fish-photobooth/cameraPage/frame.png';
+  frame.src = 'assets/photobooth/camerapage/stickers/frame.png'; // <-- corrected path here
   frame.onload = () => {
     ctx.drawImage(frame, 0, 0, WIDTH, HEIGHT);
+
+    // Save the final photo strip in localStorage (optional)
     localStorage.setItem('photoStrip', canvas.toDataURL('image/png'));
+
+    // Redirect to final page after a brief delay
     setTimeout(() => window.location.href = 'final.html', 50);
   };
+  // if image already loaded, call onload immediately
   frame.complete && frame.onload();
 };
 
