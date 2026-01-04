@@ -3,42 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Photobooth</title>
+  <title>Camera</title>
 
-  <!-- Corrected CSS path -->
-  <link rel="stylesheet" href="stylesheets/camera.css" />
-</head>
-<body>
-
-  <div class="photobooth-container" id="booth">
-    <div class="bubble-container"></div>
-
-    <!-- Countdown -->
     <div class="countdown-timer">3</div>
-
-    <!-- Canvas for final photo strip -->
     <canvas id="finalCanvas" width="1176" height="1470"></canvas>
-
-    <!-- Live video feed -->
     <video id="liveVideo" autoplay playsinline muted></video>
-
-    <!-- Overlay frame -->
-    <img
-      class="frame-overlay"
-      src="assets/photobooth/camerapage/stickers/frame.png"
-      alt="frame"
-    />
+    <img class="frame-overlay" src="Assets/photobooth/camerapage/frame.png" alt="frame overlay" />
   </div>
 
-  <!-- Controls -->
   <div class="controls">
     <button id="takePhoto">Capture</button>
-    <button id="readyButton" disabled style="display:none;">Ready</button>
+    <button id="readyButton" disabled style="display: none;">Ready</button>
   </div>
 
-  <!-- Corrected JS paths -->
-  <script src="javascripts/camera.js"></script>
-  <script src="javascripts/bubbles.js"></script>
-
+  <script src="Javascripts/camera.js"></script>
+  <script src="Javascripts/bubbles.js"></script>
 </body>
 </html>
