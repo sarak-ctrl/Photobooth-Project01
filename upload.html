@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Upload</title>
 
-  <!-- Corrected CSS path -->
-  <link rel="stylesheet" href="stylesheets/camera.css" />
-
+  <link rel="stylesheet" href="StyleSheets/camera.css" />
   <style>
     /* hide the actual file input */
     #uploadPhotoInput {
@@ -16,22 +14,15 @@
   </style>
 </head>
 <body>
+  </div>
 
   <div class="photobooth-container" id="booth">
-    <div class="bubble-container"></div>
-
-    <!-- Canvas for uploaded photo -->
     <canvas id="finalCanvas" width="1176" height="1470"></canvas>
 
     <!-- hidden file input -->
     <input type="file" id="uploadPhotoInput" accept="image/*" />
 
-    <!-- Overlay frame -->
-    <img
-      class="frame-overlay"
-      src="assets/photobooth/camerapage/stickers/frame.png"
-      alt="frame overlay"
-    />
+    <img class="frame-overlay" src="Assets/photobooth/camerapage/frame.png" alt="frame overlay" />
   </div>
 
   <div class="controls">
@@ -39,8 +30,7 @@
     <button id="readyButton" disabled style="display:none;">Ready</button>
   </div>
 
-  <!-- Corrected JS paths -->
-  <script src="javascripts/upload.js"></script>
-  <script src="javascripts/bubbles.js"></script>
+  <script src="Javascripts/upload.js"></script>
+  <script src="Javascripts/bubbles.js"></script>
 </body>
 </html>
