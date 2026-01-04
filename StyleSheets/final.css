@@ -1,4 +1,9 @@
-/* body */
+/* Root variables (defined for button colors) */
+:root {
+  --main-text: #D30000;  /* Red text for buttons */
+}
+
+/* Body */
 body {
   background-color: #f5f4f0;
   display: flex;
@@ -9,7 +14,7 @@ body {
   gap: 0;
 }
 
-/* typography */
+/* Typography */
 h1 {
   color: #555555;
   font-family: Castoro, serif;
@@ -23,7 +28,7 @@ p {
   margin-top: -8px;
 }
 
-/* logo */
+/* Logo */
 .logo {
   position: relative;
   width: 80px;
@@ -34,7 +39,7 @@ p {
   height: auto;
 }
 
-/* sticker container */
+/* Sticker container */
 .sticker-container {
   display: flex;
   flex-direction: column;
@@ -46,7 +51,7 @@ p {
   padding: 0;
 }
 
-/* canvas container */
+/* Canvas container */
 #canvasContainer {
   position: relative;
   margin-top: 20px;
@@ -57,7 +62,7 @@ p {
   align-items: center;
 }
 
-/* mobile */
+/* Mobile */
 @media (max-width: 768px) {
   #canvasContainer {
     width: 80vw;
@@ -65,7 +70,7 @@ p {
   }
 }
 
-/* canvas */
+/* Canvas */
 canvas {
   width: 100%;
   height: auto;
@@ -74,7 +79,7 @@ canvas {
   display: block;
 }
 
-/* sticker buttons container */
+/* Sticker buttons container */
 .sticker-btns {
   display: flex;
   flex-direction: row;
@@ -87,7 +92,7 @@ canvas {
   cursor: pointer;
 }
 
-/*  button container */
+/* Button container */
 .button-container {
   display: flex;
   flex-direction: row;
@@ -97,7 +102,7 @@ canvas {
   padding-top: 2vh;
 }
 
-/* buttons */
+/* Buttons */
 button {
   font-family: Castoro, serif;
   font-size: 1.2rem;
@@ -115,7 +120,7 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* sticker buttons */
+/* Sticker buttons */
 .sticker-btn {
   width: 15%;
   aspect-ratio: 75/60;
@@ -131,12 +136,12 @@ button:hover {
   padding-right: 1vw;
 }
 
-/* individual sticker urls */
-.sticker1-btn { background-image: url("../Assets/photobooth/finalpage/sticker1Button.png"); }
-.sticker2-btn { background-image: url("../Assets/photobooth/finalpage/sticker2Button.png"); }
-.reset-btn { background-image: url("../Assets/photobooth/finalpage/resetButton.png"); }
+/* Individual sticker URLs (corrected paths, assuming final.html is in root) */
+.sticker1-btn { background-image: url("./Assets/photobooth/finalpage/sticker1Button.png"); }
+.sticker2-btn { background-image: url("./Assets/photobooth/finalpage/sticker2Button.png"); }
+.reset-btn { background-image: url("./Assets/photobooth/finalpage/resetButton.png"); }
 
-/* heading content */
+/* Heading content */
 .heading-content {
   display: flex;
   flex-direction: column;
@@ -148,18 +153,18 @@ button:hover {
   padding: 0;
 }
 
-/* mobile heading */
+/* Mobile heading */
 @media (max-width: 768px) {
   .heading-content {
     width: 90vw;
   }
 }
 
-/* menu header */
+/* Menu header (corrected path) */
 .menu-header {
   width: 100%;
   aspect-ratio: 517/68;
-  background-image: url('../Assets/photobooth/camerapage/frame.png');
+  background-image: url('./Assets/photobooth/camerapage/frame.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
