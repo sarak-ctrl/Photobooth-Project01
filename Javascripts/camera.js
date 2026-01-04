@@ -1,7 +1,23 @@
+// Add this at the top or in a new function
+async function initCamera() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    elements.video.srcObject = stream;
+    elements.video.play();
+    moveVideoToHalf(0);  // Start with top half
+  } catch (err) {
+    console.error;('Camera access denied or failed:', err);
+    alert('Camera access is required for the photobooth. Please allow permissions.');
+  }
+}
+
+// Call it on page load
+window.addEventListener('DOMContentLoaded', initCamera);
+
 // constants
 const WIDTH = 1176, HEIGHT = 1470, HALF = HEIGHT / 2; 
 
-// dom elements
+// DOM elements (with null checks for debugging) 
 const elements = {
   video: document.getElementById('liveVideo'),
   canvas: document.getElementById('finalCanvas'),
@@ -10,6 +26,42 @@ const elements = {
   downloadBtn: document.getElementById('downloadBtn'),
   countdownEl: document.querySelector('.countdown-timer')
 };
+
+// After defining elements, add: 
+// Null checks (add more if needed, e.g., for takePhotoBtn)
+if (!elements.video) console.error('Video element not found!');
+if (!elements.canvas) console.error('Canvas element not found!');
+if (!elements.ctx) console.error('Canvas context not found!');
+if (!elements.takePhotoBtn) console.error('Take photo button not found!'); 
+if (!elements.countdownEl) console.error('Countdown element not found!'); 
+// Etc
+
+// Add initCamera function
+// Initialize camera (with mobile front-camera preference)
+async function initCamera() { 
+  try {
+    // Add facingMode for mobile front-camera preference 
+    // Constraints: Prioritizes front-facing camera on mobile
+    const constraints = { video: { facingMode: 'user' } }; 
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    elements.video.srcObject = stream;
+    elements.video.play();
+    moveVideoToHalf(0); // Start with top half 
+  } catch (err) {
+    console.error('Camera access failed:', err);
+    alert('Camera access is required. Please allow permissions and try again.');
+  }
+} 
+
+// Add event listener for take photo 
+// Event listener for take photo button 
+elements.takePhotoBtn.addEventListener('click', () => { 
+  elements.takePhotoBtn.disabled = true; // Prevent spamming 
+  startCountdown(capturePhoto);
+});
+
+// Call init on load 
+window.addEventListener('DOMContentLoaded', initCamera);
 
 let photoStage = 0; // 0=top,1=bottom,2=done
 
@@ -48,8 +100,17 @@ const capturePhoto = () => {
   const targetAspect = WIDTH / HALF, vAspect = vW / vH;
   let sx, sy, sw, sh;
 
-  if (vAspect > targetAspect) { sh = vH; sw = vH * targetAspect; sx = (vW - sw) / 2; sy = 0; }
-  else { sw = vW; sh = vW / targetAspect; sx = 0; sy = (vH - sh) / 2; }
+  if (vAspect > targetAspect) { 
+    sh = vH; 
+    sw = vH * targetAspect; 
+    sx = (vW - sw) / 2; 
+    sy = 0; 
+  } else { 
+    sw = vW; 
+    sh = vW / targetAspect; 
+    sx = 0; 
+    sy = (vH - sh) / 2;
+  }
 
   ctx.save();
   ctx.translate(WIDTH, 0);
@@ -58,8 +119,12 @@ const capturePhoto = () => {
   ctx.restore();
 
    photoStage++;
-  if (photoStage === 1) { moveVideoToHalf(1); takePhotoBtn.disabled = false; }
-  else if (photoStage === 2) finalizePhotoStrip();
+  if (photoStage === 1) { 
+    moveVideoToHalf(1); 
+    takePhotoBtn.disabled = false; 
+  } else if (photoStage === 2) {
+    finalizePhotoStrip();
+  }
 };
 
 // finalize photo strip
@@ -67,11 +132,11 @@ const finalizePhotoStrip = () => {
   const { video, ctx, canvas } = elements;
   video.style.display = 'none';
   const frame = new Image();
-  frame.src = 'Assets/photobooth/camerapage/frame.png';
+  frame.src = './Assets/photobooth/camerapage/frame.png'; // Corrected path (relative to root)
   frame.onload = () => {
     ctx.drawImage(frame, 0, 0, WIDTH, HEIGHT);
     localStorage.setItem('photoStrip', canvas.toDataURL('image/png'));
     setTimeout(() => window.location.href = 'final.html', 50);
   };
-  frame.complete && frame.onload();
+  if (frame.complete) frame.onload(); // Handle cached images 
 };
