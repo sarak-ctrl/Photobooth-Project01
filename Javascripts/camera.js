@@ -1,7 +1,7 @@
 // constants
 const WIDTH = 1176, HEIGHT = 1470, HALF = HEIGHT / 2; 
 
-// dom elements
+// DOM elements
 const elements = {
   video: document.getElementById('liveVideo'),
   canvas: document.getElementById('finalCanvas'),
@@ -12,9 +12,10 @@ const elements = {
   filterSelect: document.getElementById('filterSelect')
 };
 
-let photoStage = 0; // 0=top,1=bottom,2=done
+let photoStage = 0; // 0=top, 1=bottom, 2=done
+let capturedImages = []; // store the top and bottom captured frames
 
-// move video to half
+// move video preview to top or bottom half
 const moveVideoToHalf = i => {
   const { video } = elements;
   video.style.display = 'block';
@@ -74,24 +75,38 @@ const startCountdown = callback => {
   }, 1000);
 };
 
-// capture photo (freeze the current frame)
+// capture photo (freeze current frame)
 const capturePhoto = () => {
+  const { ctx, canvas } = elements;
+  const img = document.createElement('canvas');
+  img.width = WIDTH;
+  img.height = HALF;
+  img.getContext('2d').drawImage(canvas, 0, photoStage * HALF, WIDTH, HALF, 0, 0, WIDTH, HALF);
+  capturedImages.push(img);
+
   photoStage++;
-  const { takePhotoBtn } = elements;
-  if (photoStage === 1) {
-    moveVideoToHalf(1);
-    takePhotoBtn.disabled = false;
-  } else if (photoStage === 2) {
+
+  if (photoStage < 2) {
+    moveVideoToHalf(1); // move video to bottom half
+    elements.takePhotoBtn.disabled = false;
+  } else {
     finalizePhotoStrip();
   }
 };
 
-// finalize photo strip
+// finalize photo strip (draw both halves + frame)
 const finalizePhotoStrip = () => {
   const { video, ctx, canvas } = elements;
   video.style.display = 'none';
+
+  // draw top and bottom captured images
+  capturedImages.forEach((img, i) => {
+    ctx.drawImage(img, 0, 0, WIDTH, HALF, 0, i * HALF, WIDTH, HALF);
+  });
+
+  // draw frame
   const frame = new Image();
-  frame.src = 'Assets/fish-photobooth/camerapage/frame.png';
+  frame.src = 'Assets/fish-photobooth/cameraPage/frame.png';
   frame.onload = () => {
     ctx.drawImage(frame, 0, 0, WIDTH, HEIGHT);
     localStorage.setItem('photoStrip', canvas.toDataURL('image/png'));
@@ -100,7 +115,7 @@ const finalizePhotoStrip = () => {
   frame.complete && frame.onload();
 };
 
-// download photo
+// download photo (if user wants a quick download)
 const downloadPhoto = () => {
   elements.canvas.toBlob(blob => {
     const a = document.createElement('a');
@@ -117,27 +132,25 @@ const setupCamera = () => {
       elements.video.srcObject = stream;
       elements.video.play();
       moveVideoToHalf(0);
-      requestAnimationFrame(updateLivePreview); // start live preview
+      requestAnimationFrame(updateLivePreview);
     })
     .catch(err => alert('Camera access failed: ' + err));
 };
 
-// setup events
+// setup event listeners
 const setupEventListeners = () => {
   const { takePhotoBtn, downloadBtn, filterSelect } = elements;
 
   takePhotoBtn.addEventListener('click', () => {
-    if (photoStage > 1) return;
+    if (photoStage >= 2) return;
     takePhotoBtn.disabled = true;
     startCountdown(capturePhoto);
   });
 
   downloadBtn.addEventListener('click', downloadPhoto);
 
-  // allow live filter changes in video preview
-  filterSelect.addEventListener('input', () => {
-    // live preview automatically updates via updateLivePreview
-  });
+  // filter changes automatically applied via updateLivePreview
+  filterSelect.addEventListener('input', () => {});
 
   window.addEventListener('resize', () => {
     if (photoStage === 0) moveVideoToHalf(0);
@@ -145,7 +158,7 @@ const setupEventListeners = () => {
   });
 };
 
-// initialize photo booth
+// initialize
 const initPhotoBooth = () => { setupCamera(); setupEventListeners(); };
 initPhotoBooth();
 
