@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Decorate & Download</title>
-
-  <link rel="stylesheet" href="StyleSheets/final.css" />
+  <link rel="stylesheet" href="./StyleSheets/final.css">  <!-- Corrected path -->
 </head>
 <body>
+  <!-- Logo section (added for consistency) -->
+  <div class="logo">
+    <img src="./Assets/photobooth/camerapage/frame.png" alt="Logo">  <!-- Placeholder; replace with actual logo -->
+  </div>
 
   <div class="heading-content">
-    <div class="menu-header" style="display: none;"></div>
+    <div class="menu-header"></div>  <!-- Removed display: none; if you want it visible -->
     <div class="sticker-container">
       <h1>Add Stickers!</h1>
       <p>(drag to reposition)</p>
@@ -31,6 +34,6 @@
     <button id="homeBtn">Home</button>
   </div>
 
-  <script type="module" src="Javascripts/final.js"></script>
+  <script src="./Javascripts/final.js"></script>  <!-- Corrected path; removed type="module" unless needed -->
 </body>
 </html>
