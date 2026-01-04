@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Camera</title>
+  <link rel="stylesheet" href="./StyleSheets/camera.css">  <!-- Link to your CSS -->
+</head>
+<body>
+  <!-- Logo section -->
+  <div class="logo">
+    <img src="./Assets/photobooth/camerapage/frame.png" alt="Logo">  <!-- Placeholder; replace with actual logo if different -->
+  </div>
 
+  <!-- Photobooth container -->
+  <div class="photobooth-container">
     <div class="countdown-timer">3</div>
     <canvas id="finalCanvas" width="1176" height="1470"></canvas>
     <video id="liveVideo" autoplay playsinline muted></video>
-    <img class="frame-overlay" src="Assets/photobooth/camerapage/frame.png" alt="frame overlay" />
+    <img class="frame-overlay" src="./Assets/photobooth/camerapage/frame.png" alt="Frame overlay">
   </div>
 
+  <!-- Controls -->
   <div class="controls">
     <button id="takePhoto">Capture</button>
-    <button id="readyButton" disabled style="display: none;">Ready</button>
+    <button id="readyButton" disabled style="display: none;">Ready</button>  <!-- If not used, remove or adjust -->
   </div>
 
-  <script src="Javascripts/camera.js"></script>
-  <script src="Javascripts/bubbles.js"></script>
+  <!-- Scripts -->
+  <script src="./Javascripts/camera.js"></script>
+  <!-- Removed bubbles.js as it's not in your folders; add back if needed -->
 </body>
 </html>
