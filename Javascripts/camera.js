@@ -8,7 +8,7 @@ const elements = {
   ctx: document.getElementById('finalCanvas').getContext('2d'),
   takePhotoBtn: document.getElementById('takePhoto'),
   downloadBtn: document.getElementById('downloadBtn'),
-  countdownEl: document.querySelector('.countdown-timer')
+  countdownEl: document.querySelector('.countdown-timer'),
   filterSelect: document.getElementById('filterSelect') // <-- new
 };
 
