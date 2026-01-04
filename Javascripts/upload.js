@@ -1,15 +1,16 @@
+// upload.js (camera page)
 window.addEventListener('DOMContentLoaded', () => {
-  // clear local storage
+  // Clear previous photo
   localStorage.removeItem('photoStrip');
 
-  // constants
+  // Constants
   const WIDTH = 1176, HEIGHT = 1470, HALF = HEIGHT / 2;
 
-  let uploadedImages = []; // store top and bottom uploaded photos
-  let currentPreviewIndex = null; // track which photo is currently being previewed
-  let photoStage = 0; // 0=top, 1=bottom, 2=done
+  let uploadedImages = [];       // store top and bottom images
+  let currentPreviewIndex = null;
+  let photoStage = 0;            // 0=top, 1=bottom, 2=done
 
-  // dom elements
+  // DOM elements
   const elements = {
     canvas: document.getElementById('finalCanvas'),
     ctx: document.getElementById('finalCanvas').getContext('2d'),
@@ -20,7 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
     filterSelect: document.getElementById('filterSelect')
   };
 
-  // draw uploaded photo
+  // Draw uploaded photo on canvas
   const drawPhoto = img => {
     uploadedImages.push(img);
     currentPreviewIndex = uploadedImages.length - 1;
@@ -29,7 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (photoStage === 2) finalizePhotoStrip();
   };
 
-  // redraw canvas
+  // Redraw canvas with current filter
   const redrawCanvas = () => {
     const { ctx, filterSelect } = elements;
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
@@ -40,26 +41,26 @@ window.addEventListener('DOMContentLoaded', () => {
       const targetAspect = WIDTH / HALF;
       let sx, sy, sw, sh;
 
-      if (imgAspect > targetAspect) { 
-        sh = img.height; 
-        sw = img.height * targetAspect; 
-        sx = (img.width - sw) / 2; 
-        sy = 0; 
-      } else { 
-        sw = img.width; 
-        sh = img.width / targetAspect; 
-        sx = 0; 
-        sy = (img.height - sh) / 2; 
+      if (imgAspect > targetAspect) {
+        sh = img.height;
+        sw = img.height * targetAspect;
+        sx = (img.width - sw) / 2;
+        sy = 0;
+      } else {
+        sw = img.width;
+        sh = img.width / targetAspect;
+        sx = 0;
+        sy = (img.height - sh) / 2;
       }
 
-      // Apply filter only to the live preview photo
+      // Apply filter only to live preview photo
       ctx.filter = (i === currentPreviewIndex) ? (filterSelect.value || 'none') : 'none';
       ctx.drawImage(img, sx, sy, sw, sh, 0, yOffset, WIDTH, HALF);
       ctx.filter = 'none';
     });
   };
 
-  // filter change live preview
+  // Update preview when filter changes
   if (elements.filterSelect) {
     elements.filterSelect.addEventListener('input', () => {
       if (uploadedImages.length === 0) return;
@@ -67,7 +68,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // finalize photo strip
+  // Finalize photo strip with frame
   const finalizePhotoStrip = () => {
     const { ctx, readyBtn, downloadBtn, uploadBtn } = elements;
     const frame = new Image();
@@ -81,13 +82,13 @@ window.addEventListener('DOMContentLoaded', () => {
     frame.src = 'Assets/fish-photobooth/camerapage/frame.png';
   };
 
-  // ready button
+  // Ready button: save photo and go to final page
   elements.readyBtn.addEventListener('click', () => {
     localStorage.setItem('photoStrip', elements.canvas.toDataURL('image/png'));
     window.location.href = 'final.html';
   });
 
-  // download photo
+  // Download button
   const downloadPhoto = () => {
     const { canvas } = elements;
     canvas.toBlob(blob => {
@@ -99,13 +100,14 @@ window.addEventListener('DOMContentLoaded', () => {
   };
   elements.downloadBtn.addEventListener('click', downloadPhoto);
 
-  // upload button
+  // Upload button
   elements.uploadBtn.addEventListener('click', () => elements.uploadInput.click());
 
-  // handle upload
+  // Handle file upload
   elements.uploadInput.addEventListener('change', e => {
     const file = e.target.files[0];
     if (!file) return;
+
     const img = new Image();
     img.onload = () => {
       drawPhoto(img);
@@ -115,7 +117,7 @@ window.addEventListener('DOMContentLoaded', () => {
     elements.uploadInput.value = '';
   });
 
-  // logo redirect
+  // Logo redirect
   const logo = document.querySelector('.logo');
   if (logo) logo.addEventListener('click', () => window.location.href = 'index.html');
 });
