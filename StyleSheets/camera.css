@@ -35,7 +35,7 @@ body {
   width: 60vmin;
   max-width: 588px;
   aspect-ratio: 588 / 735;
-  background: #D5E8EB;
+  background: #D30000;
   overflow: hidden;
 }
 
@@ -64,7 +64,7 @@ body {
   border-radius: 0.75rem;
   border: 1.358px solid #1E1E1E;
   background: #FFF;
-  color: #1E1E1E;
+  color: #D30000;
   text-align: center;
   font-family: Castoro, serif;
   font-size: 1.697rem;
@@ -140,29 +140,6 @@ button:hover {
   height: 3rem;
   padding: 0.5rem 1rem;
   background-color: #FFF;
-}
-
-/* bubble container */
-.bubble-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  aspect-ratio: 588 / 735;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 100;
-}
-
-/* bubble styling */
-.bubble {
-  position: absolute;
-  bottom: -100px;
-  opacity: 1;
-  transform-origin: center;
-  animation-name: riseSpin;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
 }
 
 /* bubble animation */
