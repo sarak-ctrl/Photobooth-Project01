@@ -130,9 +130,3 @@ homeBtn.addEventListener('click', () => window.location.href = 'camerapage.html'
 
 // Redraw on filter change
 if (filterSelect) filterSelect.addEventListener('change', drawCanvas);
-
-// Optional logo redirect
-document.addEventListener('DOMContentLoaded', () => {
-    const logo = document.querySelector('.logo');
-    if (logo) logo.addEventListener('click', () => window.location.href = 'camerapage.html');
-});
