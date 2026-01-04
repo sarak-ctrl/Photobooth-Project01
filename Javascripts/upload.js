@@ -79,7 +79,8 @@ window.addEventListener('DOMContentLoaded', () => {
       readyBtn.disabled = false;
       downloadBtn.style.display = 'inline-block';
     };
-    frame.src = 'Assets/fish-photobooth/camerapage/frame.png';
+    // Corrected frame path
+    frame.src = 'assets/photobooth/camerapage/stickers/frame.png';
   };
 
   // Ready button: save photo and go to final page
@@ -117,7 +118,5 @@ window.addEventListener('DOMContentLoaded', () => {
     elements.uploadInput.value = '';
   });
 
-  // Logo redirect
-  const logo = document.querySelector('.logo');
-  if (logo) logo.addEventListener('click', () => window.location.href = 'index.html');
+  // Removed logo redirect since not needed
 });
