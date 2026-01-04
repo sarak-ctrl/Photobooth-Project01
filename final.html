@@ -5,34 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Decorate & Download</title>
 
-  <!-- Corrected CSS path -->
-  <link rel="stylesheet" href="stylesheets/final.css" />
+  <link rel="stylesheet" href="StyleSheets/final.css" />
 </head>
 <body>
 
-  <div class="sticker-container">
-    <h1>Add Stickers!</h1>
-    <p>(drag to reposition)</p>
-
-    <div class="sticker-btns">
-      <!-- Corrected sticker image paths -->
-      <button
-        id="sticker1Button"
-        class="sticker-btn"
-        style="background-image:url('assets/photobooth/finalpage/sticker1Button.png')">
-      </button>
-
-      <button
-        id="sticker2Button"
-        class="sticker-btn"
-        style="background-image:url('assets/photobooth/finalpage/sticker2Button.png')">
-      </button>
-
-      <button
-        id="resetButton"
-        class="sticker-btn"
-        style="background-image:url('assets/photobooth/finalpage/resetButton.png')">
-      </button>
+  <div class="heading-content">
+    <div class="menu-header" style="display: none;"></div>
+    <div class="sticker-container">
+      <h1>Add Stickers!</h1>
+      <p>(drag to reposition)</p>
+      <div class="sticker-btns">
+        <button id="addsticker1" class="sticker-btn sticker1-btn">Add sticker1</button>
+        <button id="addsticker2" class="sticker-btn sticker2-btn">Add sticker2</button>
+        <button id="reset" class="sticker-btn reset-btn">reset</button>
+      </div>
     </div>
   </div>
 
@@ -42,10 +28,9 @@
 
   <div class="button-container">
     <button id="downloadBtn">Download</button>
-    <button id="homeBtn">Retake</button>
+    <button id="homeBtn">Home</button>
   </div>
 
-  <!-- Corrected JS path -->
-  <script src="javascripts/final.js"></script>
+  <script type="module" src="Javascripts/final.js"></script>
 </body>
 </html>
