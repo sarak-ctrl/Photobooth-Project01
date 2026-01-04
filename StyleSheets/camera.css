@@ -1,4 +1,9 @@
-/* root variables */
+/* Root variables (defined for button colors) */
+:root {
+  --main-text: #D30000;  /* Red text for buttons */
+  --white: #FFF;         /* White background */
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -17,7 +22,7 @@ body {
   padding-bottom: 2rem;
 }
 
-/* logo section */
+/* Logo section */
 .logo {
   position: relative;
   width: 80px;
@@ -29,26 +34,38 @@ body {
   height: auto;
 }
 
-/* photobooth container */
+/* Photobooth container (with aspect-ratio fallback for older browsers) */
 .photobooth-container {
   position: relative;
   width: 60vmin;
   max-width: 588px;
-  aspect-ratio: 588 / 735;
+  aspect-ratio: 588 / 735;  /* Modern CSS; fallback below */
   background: #D30000;
   overflow: hidden;
 }
 
-/* mobile */
+/* Fallback for aspect-ratio (padding-bottom creates height based on width) */
+@supports not (aspect-ratio: 1) {
+  .photobooth-container {
+    padding-bottom: 125%;  /* 735/588 ≈ 1.25, so 125% of width */
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .photobooth-container {
     width: 90vw;
     max-width: none;
     aspect-ratio: 588 / 735;
   }
+  @supports not (aspect-ratio: 1) {
+    .photobooth-container {
+      padding-bottom: 125%;
+    }
+  }
 }
 
-/* countdown timer */
+/* Countdown timer */
 .countdown-timer {
   position: absolute;
   top: 1rem;
@@ -74,7 +91,7 @@ body {
   transition: none;
 }
 
-/* canvas and video */
+/* Canvas and video */
 #finalCanvas {
   width: 100%;
   height: 100%;
@@ -88,12 +105,12 @@ body {
   width: 100%;
   height: 50%;
   object-fit: cover;
-  transform: scaleX(-1);
+  /* Removed transform: scaleX(-1); to avoid double-mirroring with JS */
   z-index: 1;
   display: none;
 }
 
-/* frame overlay */
+/* Frame overlay */
 .frame-overlay {
   position: absolute;
   top: 0;
@@ -104,7 +121,7 @@ body {
   z-index: 3;
 }
 
-/* controls */
+/* Controls */
 .controls {
   margin-top: 20px;
   display: flex;
@@ -112,7 +129,7 @@ body {
   justify-content: center;
 }
 
-/* buttons */
+/* Buttons */
 button {
   padding: 10px 16px;
   font-size: 16px;
@@ -139,10 +156,10 @@ button:hover {
   width: 10rem;
   height: 3rem;
   padding: 0.5rem 1rem;
-  background-color: #FFF;
+  background-color: var(--white);
 }
 
-/* bubble animation */
+/* Bubble animation (defined but not used; remove if not needed) */
 @keyframes riseSpin {
   0% {
     transform: translateY(0) rotate(0deg) scale(1);
