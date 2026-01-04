@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photobooth</title>
+
+  <link rel="stylesheet" href="StyleSheets/camera.css" />
+</head>
+<body>
+
+  <div class="photobooth-container" id="booth">
+    <div class="bubble-container"></div>
+    <div class="countdown-timer">3</div>
+
+    <canvas id="finalCanvas" width="1176" height="1470"></canvas>
+    <video id="liveVideo" autoplay playsinline muted></video>
+
+    <!-- frame overlay -->
+    <img
+      class="frame-overlay"
+      src="Assets/photobooth/frame.png"
+      alt="frame"
+    />
+  </div>
+
+  <div class="controls">
+    <button id="takePhoto">Capture</button>
+
+    <!-- appears after both photos -->
+    <button id="readyButton" disabled style="display:none;">
+      Ready
+    </button>
+  </div>
+
+  <script src="Javascripts/camera.js"></script>
+  <script src="Javascripts/bubbles.js"></script>
+</body>
+</html>
+
