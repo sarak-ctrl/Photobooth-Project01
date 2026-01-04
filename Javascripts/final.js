@@ -105,9 +105,9 @@ canvas.addEventListener('touchmove', pointerMove);
 canvas.addEventListener('touchend', pointerUp);
 canvas.addEventListener('touchcancel', pointerUp);
 
-// Sticker buttons
-addSticker1Btn.addEventListener('click', () => addSticker('Assets/fish-photobooth/camerapage/stickers/sticker1.png'));
-addSticker2Btn.addEventListener('click', () => addSticker('Assets/fish-photobooth/camerapage/stickers/sticker2.png'));
+// Sticker buttons with fixed paths
+addSticker1Btn.addEventListener('click', () => addSticker('assets/photobooth/camerapage/stickers/sticker1.png'));
+addSticker2Btn.addEventListener('click', () => addSticker('assets/photobooth/camerapage/stickers/sticker2.png'));
 
 // Reset button
 resetBtn.addEventListener('click', () => {
