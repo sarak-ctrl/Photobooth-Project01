@@ -1,19 +1,3 @@
-// Add this at the top or in a new function
-async function initCamera() {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    elements.video.srcObject = stream;
-    elements.video.play();
-    moveVideoToHalf(0);  // Start with top half
-  } catch (err) {
-    console.error;('Camera access denied or failed:', err);
-    alert('Camera access is required for the photobooth. Please allow permissions.');
-  }
-}
-
-// Call it on page load
-window.addEventListener('DOMContentLoaded', initCamera);
-
 // constants
 const WIDTH = 1176, HEIGHT = 1470, HALF = HEIGHT / 2; 
 
