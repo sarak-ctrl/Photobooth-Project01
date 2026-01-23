@@ -1,1 +1,50 @@
-Later
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+    <title>Photobooth</title>
+    <style>
+      * { 
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Cosmic Sans MS' , 'Arial' , sans-serif;
+          background: linear-gradient(135deg , 
+                                      #ff9a9e 0%
+                                      #fad0c4 20%
+                                      #ffecd2 40%
+                                      #fcb69f 60%
+                                      #ff9a9e 80%
+                                      #fad0c4 100%) ; 
+        background-size: 200% 200%;
+        animation: holographic 10s ease infinite;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; 
+      }
+
+      @keyframes holographic {
+        0% { background-position: 0% 50%; } 
+        50% { background-position: 100% 50%; } 
+        100% { background-position: 0% 50%; } 
+      } 
+
+      .container {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 80px 60px;
+        border-radius: 30px; 
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        max-width: 600px;
+        backdrop-filter: blur(10px); 
+      }
+
+      h1 { 
+    </style>
+  </head>
